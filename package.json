@@ -29,7 +29,7 @@
     "prettier": "^2.6.2"
   },
   "lint-staged": {
-    "src/**/*.{js,scss,json}": "prettier --single-quote --allow-empty --tab-width 4 --trailing-comma all --write"
+    "src/**/*.{js,scss,json}": "prettier --single-quote --allow-empty --trailing-comma all --tab-width 4  --write"
   },
   "husky": {
     "hooks": {
