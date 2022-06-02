@@ -4,6 +4,8 @@ const siteController = {
     },
 
     search(req, res) {
+        asdfsaf;
+
         res.render('search');
     },
 };
