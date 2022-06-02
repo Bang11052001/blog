@@ -1,29 +1,27 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
-const { engine } = require('express-handlebars'); 
+const { engine } = require('express-handlebars');
 const app = express();
 const port = 3000;
-const routes = require('./routes')
+const routes = require('./routes');
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // http looger
 // app.use(morgan('combined'))
 
-app.engine('.hbs', engine({extname: '.hbs'}));
+app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 // console.log('path :' + path.join(__dirname, 'resources/views'));
 
 routes(app);
 
-var b =2;
+var b = 2;
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}11`)
-})
-
-
+    console.log(`Example app listening on port ${port}11`);
+});
