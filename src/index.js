@@ -1,3 +1,4 @@
+const mongodb = require('mongodb');
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
@@ -5,10 +6,14 @@ const { engine } = require('express-handlebars');
 const app = express();
 const port = 3000;
 const routes = require('./routes');
+const db = require('./config/db');
+
+//connect to mongodb
+db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-          app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // http looger
