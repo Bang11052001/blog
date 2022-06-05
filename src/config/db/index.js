@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/course';
+const url = 'mongodb://localhost:27017/f8';
 
 // Use connect method to connect to the Server
 async function connect() {
     try {
-        await mongoose.connect('mongodb://localhost:27017/course');
+        await mongoose.connect(url);
         console.log('success !!!!');
     } catch (error) {
         console.log('Error', error);

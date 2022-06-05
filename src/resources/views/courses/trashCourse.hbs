@@ -1,0 +1,81 @@
+<table class="table">
+  <h2>Danh sach Thùng rác</h2>
+  <thead >
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">image_url</th>
+      <th scope="col">people_count</th>
+      <th scope="col">Option</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each courses}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{title}}</td>
+      <td>{{description}}</td>
+      <td><img class ='img-table' src={{image_url}}></td>
+      
+      <td>{{people_count}}</td>
+      <td>
+        <a id ="restoreBtn" href="/" data-id="{{_id}}">Khôi phục</a> 
+          / 
+        <a href='asdfasdf.com' data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{_id}}">Xóa Vĩnh viễn</a>
+      </td>
+    </tr>
+    {{else}}
+    <th colspan="6" class="text-center">Thùng rác rỗng<a href ='/me/course/stored'>Quay lại trang khóa học</a></th>
+   {{/each}}
+   
+  </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Do you want delete?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Xóa vĩnh viễn ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id ='forcedeleteBtn'>Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<form id ='forcedeleteForm' method="POST"></form>
+<form id ='restoreForm' method="POST"></form>
+
+<script>
+const confirmModal = document.getElementById('confirmModal')
+const restoreBtn =document.getElementById('restoreBtn');
+const restoreForm =document.getElementById('restoreForm');
+
+confirmModal.addEventListener('show.bs.modal', event => {
+  const button = event.relatedTarget
+  const id = button.getAttribute('data-id')
+  const deleteElement = document.querySelector('#forcedeleteBtn');
+
+  deleteElement.onclick = function() {
+  const deleteForm = document.querySelector('#forcedeleteForm');
+  deleteForm.action =`/me/course/forcdelete?id=${id}&_method=DELETE`;
+  deleteForm.submit();
+  }
+})
+
+restoreBtn.onclick = function(e) {
+  e.preventDefault();
+  const id = restoreBtn.getAttribute('data-id');
+  console.log(restoreBtn)
+  restoreForm.action =`/me/course/restore?id=${id}&_method=PATCH`;
+  restoreForm.submit();
+}
+</script>

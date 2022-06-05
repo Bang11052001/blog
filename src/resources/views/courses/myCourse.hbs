@@ -1,0 +1,69 @@
+<table class="table">
+  <h2>Danh sach khoa hoc</h2>
+  <thead class="mt-4">
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">image_url</th>
+      <th scope="col">people_count</th>
+      <th scope="col">Option</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each courses}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{title}}</td>
+      <td>{{description}}</td>
+      <td><img class ='img-table' src={{image_url}}></td>
+      
+      <td>{{people_count}}</td>
+      <td>
+        <a href="/course/edit?id={{_id}}">Sửa</a> 
+          / 
+        <a href='#' data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{_id}}">Delete</a>
+      </td>
+    </tr>
+    {{else}}
+    <th colspan="6" class="text-center">Không có khóa học nào. <a href ='/me/course/trash'>Thêm khóa học</a></th>
+   {{/each}}
+   
+  </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Do you want delete?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Choose your choice!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id ='deleteBtn'>Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<form id ='deleteForm' method="POST"></form>
+
+<script>
+const confirmModal = document.getElementById('confirmModal')
+confirmModal.addEventListener('show.bs.modal', event => {
+  const button = event.relatedTarget
+  const id = button.getAttribute('data-id')
+  const deleteElement = document.querySelector('#deleteBtn');
+
+  deleteElement.onclick = function() {
+  const deleteForm = document.querySelector('#deleteForm');
+  deleteForm.action =`/me/course/delete?id=${id}&_method=PATCH`;
+  deleteForm.submit();
+  }
+})
+</script>

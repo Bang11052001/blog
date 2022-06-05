@@ -1,0 +1,25 @@
+{{#with course}}
+<div class="container mt-4">
+<form method="POST" action ='/me/course/stored?id={{_id}}&_method=PUT'>
+<h3>Cap nhat cac khoa hoc</h3>
+  <div class="mb-3">
+    <label for="title" class="form-label">title</label>
+    <input type="text" class="form-control" id="title" value ='{{title}}' name = 'title'>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">description</label>
+    <input type="text" class="form-control" id="description" value ='{{description}}' name = 'description'>
+  </div>
+  <div class="mb-3">
+    <label for="people study" class="form-label">people study</label>
+    <input type="text" class="form-control" id="people study" value ='{{people_count}}' name = 'people_count'>
+  </div>
+  <div class="mb-3">
+    <label for="video_id" class="form-label">video_id</label>
+    <input type="text" class="form-control" id="video_id" value ='{{video_id}}' name = 'video_id'>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+</div>
+{{/with}}
